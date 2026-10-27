@@ -1,0 +1,83 @@
+{
+  "screenshotCount": 10,
+  "screenshots": [
+    {
+      "file": "screenshots/large/01.jpg",
+      "width": 1320,
+      "height": 2868,
+      "alpha": false,
+      "sha256": "9e3e459fc0570457b78744f184f5a5a9b7c6d1c823303a5cb24dbe62cb4f4476"
+    },
+    {
+      "file": "screenshots/large/02.jpg",
+      "width": 1320,
+      "height": 2868,
+      "alpha": false,
+      "sha256": "98fc92b526ce6ad3083ffdf00b5ebf35db55be159b9b1b4b8127470edd01e32c"
+    },
+    {
+      "file": "screenshots/large/03.jpg",
+      "width": 1320,
+      "height": 2868,
+      "alpha": false,
+      "sha256": "4eab055cf21d78431aa98124fd5ac3f6c3d9cd29826744b087e2769499c0cab2"
+    },
+    {
+      "file": "screenshots/large/04.jpg",
+      "width": 1320,
+      "height": 2868,
+      "alpha": false,
+      "sha256": "960cbceaaf923dc6b837d7b39f5775329a0b4d5b7e2e0302eb67cd500057c9bb"
+    },
+    {
+      "file": "screenshots/large/05.jpg",
+      "width": 1320,
+      "height": 2868,
+      "alpha": false,
+      "sha256": "1ed59ddd2bdab3f02393a6108209a5235eb2f2e8bac73a4c4636eb1494075bdd"
+    },
+    {
+      "file": "screenshots/medium/01.jpg",
+      "width": 1206,
+      "height": 2622,
+      "alpha": false,
+      "sha256": "a8a8615ce9906470f0d7269e42bcbeac030e0bae693a60a74ef9c6191fd32bc4"
+    },
+    {
+      "file": "screenshots/medium/02.jpg",
+      "width": 1206,
+      "height": 2622,
+      "alpha": false,
+      "sha256": "868a5103d2df3b889cb32391a16bf966b9ba8e8399cec571b688b416f837c56b"
+    },
+    {
+      "file": "screenshots/medium/03.jpg",
+      "width": 1206,
+      "height": 2622,
+      "alpha": false,
+      "sha256": "e192f72b2e68ac954414bfb3ce368bb84b7f717939286991c7e4ad41eac95dc2"
+    },
+    {
+      "file": "screenshots/medium/04.jpg",
+      "width": 1206,
+      "height": 2622,
+      "alpha": false,
+      "sha256": "cc68c28d3434db5f274cb49a449c9c3251231704f0d3906796f10d691043dd7b"
+    },
+    {
+      "file": "screenshots/medium/05.jpg",
+      "width": 1206,
+      "height": 2622,
+      "alpha": false,
+      "sha256": "8ad93b1f6771224cee7bf24408845b7e9d74037a1b00d942654c5764945a5fb2"
+    }
+  ],
+  "icon": {
+    "size": [
+      1024,
+      1024
+    ],
+    "alpha": false
+  },
+  "published": false
+}

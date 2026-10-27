@@ -1,0 +1,24 @@
+PV KOMPASS – ICON UND APP-STORE-SCREENSHOTS
+
+Auf dunkelblauem Hintergrund liegt ein blaues Solarmodul. Darüber stehen eine goldene Sonne und eine diagonal nach rechts oben gerichtete Kompassnadel. Das Icon enthält keinen Text.
+
+1. PV-Module besser ausrichten.
+Neigung und Himmelsrichtung direkt mit dem iPhone erfassen.
+Bildinhalt: Messscreen mit Anleitung zum Auflegen und der Schaltfläche Messung starten.
+
+2. Neigung und Richtung. Klar ablesbar.
+Verständliche Ergebnisse mit Angaben zum Nordbezug.
+Bildinhalt: Abgeschlossene Demo-Messung mit Neigung und geografischer Ausrichtung.
+
+3. Deine Messungen. An einem Ort.
+Mit Namen, Zeitstempel und – wenn verfügbar – GPS.
+Bildinhalt: Messverlauf mit benannten Beispielmessungen, Gesamtexport und Alle-Löschen.
+
+4. Einzeln teilen. Oder alle zusammen.
+Messungen als CSV über das Apple-Teilen-Menü exportieren.
+Bildinhalt: Natives Apple-Teilen-Menü für den CSV-Gesamtexport.
+
+5. Mit Anleitung. Ohne Rätselraten.
+Klare Messhinweise. Für VoiceOver und große Schrift entwickelt.
+Bildinhalt: Messanleitung mit Hinweisen zur Auflage, zum Start und zur Kalibrierung.
+

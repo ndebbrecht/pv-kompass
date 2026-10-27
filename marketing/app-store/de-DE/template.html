@@ -1,0 +1,18 @@
+<!doctype html><html lang="de"><meta charset="utf-8"><title>PV Kompass – App-Store-Screenshot</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#061830;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;color:white}.stage{position:absolute;width:1320px;height:2868px;transform-origin:top left;background:radial-gradient(ellipse at 100% 85%,#153e64 0,transparent 55%),linear-gradient(145deg,#0b2b51,#05152b 70%)}.brand{position:absolute;left:98px;top:83px;display:flex;align-items:center;gap:22px;font-size:43px;font-weight:650;letter-spacing:-.5px}.brand img{width:76px;height:76px;border-radius:18px}.number{position:absolute;right:104px;top:108px;color:#a9bed6;font-size:29px;font-weight:600;letter-spacing:4px}h1{position:absolute;left:96px;top:226px;margin:0;font-size:110px;line-height:1.09;font-weight:760;letter-spacing:-4.7px;width:1140px}h1 span{color:#ffd064}.sub{position:absolute;left:102px;top:502px;width:1100px;font-size:47px;line-height:1.42;font-weight:420;color:#d3e0ed;margin:0}.phone{position:absolute;top:744px;left:196px;width:928px;padding:15px;background:#10253d;border-radius:124px;box-shadow:0 38px 95px #0009,0 0 0 3px #9bb1c34d;overflow:hidden}.phone img{display:block;width:100%;height:auto;border-radius:109px}.foot{position:absolute;left:100px;right:100px;bottom:58px;font-size:28px;line-height:1.5;color:#b6c9db;text-align:center}
+</style>
+<div class="stage"><div class="brand"><img src="../../icon/pv-kompass-1024.png" alt="Solarmodul, Sonne und Kompassnadel">PV Kompass</div><div class="number"></div><h1></h1><p class="sub"></p><div class="phone"><img id="shot" alt=""></div><div class="foot">Beispieldaten · Entwickelt für iPhone und VoiceOver</div></div>
+<script>
+const all=[
+ ['PV-Module','besser ausrichten.','Neigung und Himmelsrichtung direkt mit dem iPhone erfassen.','01-start','Messscreen mit Anleitung zum Auflegen und der Schaltfläche Messung starten.'],
+ ['Neigung und Richtung.','Klar ablesbar.','Verständliche Ergebnisse mit Angaben zum Nordbezug.','02-ergebnis','Abgeschlossene Demo-Messung mit Neigung und geografischer Ausrichtung.'],
+ ['Deine Messungen.','An einem Ort.','Mit Namen, Zeitstempel und – wenn verfügbar – GPS.','03-verlauf','Messverlauf mit benannten Beispielmessungen, Gesamtexport und Alle-Löschen.'],
+ ['Einzeln teilen.','Oder alle zusammen.','Messungen als CSV über das Apple-Teilen-Menü exportieren.','04-csv-teilen','Natives Apple-Teilen-Menü für den CSV-Gesamtexport.'],
+ ['Mit Anleitung.','Ohne Rätselraten.','Klare Messhinweise. Für VoiceOver und große Schrift entwickelt.','05-anleitung','Messanleitung mit Hinweisen zur Auflage, zum Start und zur Kalibrierung.']];
+const q=new URLSearchParams(location.search),kind=q.get('kind')||'large',i=Number(q.get('screen')||1)-1,a=all[i];
+document.querySelector('.stage').style.transform=`scale(${innerWidth/1320})`;
+document.querySelector('.number').textContent=`0${i+1} / 05`;
+document.querySelector('h1').innerHTML=a[0]+'<br><span>'+a[1]+'</span>';
+document.querySelector('.sub').textContent=a[2];document.querySelector('#shot').src=`raw/${kind}/${a[3]}.png`;document.querySelector('#shot').alt=a[4];
+</script></html>

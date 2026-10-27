@@ -1,0 +1,57 @@
+{
+  "app": "PV Kompass",
+  "language": "de-DE",
+  "status": "Vorbereitet, nicht hochgeladen oder veröffentlicht",
+  "iconDescription": "Auf dunkelblauem Hintergrund liegt ein blaues Solarmodul. Darüber stehen eine goldene Sonne und eine diagonal nach rechts oben gerichtete Kompassnadel. Das Icon enthält keinen Text.",
+  "formats": {
+    "medium": [
+      1206,
+      2622
+    ],
+    "large": [
+      1320,
+      2868
+    ]
+  },
+  "device": "iPhone 17 Pro / iPhone 17 Pro Max, iOS 26.2 Simulator",
+  "exampleData": true,
+  "privateLocationData": false,
+  "appleSpecifications": "https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications",
+  "screenshots": [
+    {
+      "number": 1,
+      "headline": "PV-Module besser ausrichten.",
+      "subtitle": "Neigung und Himmelsrichtung direkt mit dem iPhone erfassen.",
+      "rawName": "01-start.png",
+      "description": "Messscreen mit Anleitung zum Auflegen und der Schaltfläche Messung starten."
+    },
+    {
+      "number": 2,
+      "headline": "Neigung und Richtung. Klar ablesbar.",
+      "subtitle": "Verständliche Ergebnisse mit Angaben zum Nordbezug.",
+      "rawName": "02-ergebnis.png",
+      "description": "Abgeschlossene Demo-Messung mit Neigung und geografischer Ausrichtung."
+    },
+    {
+      "number": 3,
+      "headline": "Deine Messungen. An einem Ort.",
+      "subtitle": "Mit Namen, Zeitstempel und – wenn verfügbar – GPS.",
+      "rawName": "03-verlauf.png",
+      "description": "Messverlauf mit benannten Beispielmessungen, Gesamtexport und Alle-Löschen."
+    },
+    {
+      "number": 4,
+      "headline": "Einzeln teilen. Oder alle zusammen.",
+      "subtitle": "Messungen als CSV über das Apple-Teilen-Menü exportieren.",
+      "rawName": "04-csv-teilen.png",
+      "description": "Natives Apple-Teilen-Menü für den CSV-Gesamtexport."
+    },
+    {
+      "number": 5,
+      "headline": "Mit Anleitung. Ohne Rätselraten.",
+      "subtitle": "Klare Messhinweise. Für VoiceOver und große Schrift entwickelt.",
+      "rawName": "05-anleitung.png",
+      "description": "Messanleitung mit Hinweisen zur Auflage, zum Start und zur Kalibrierung."
+    }
+  ]
+}
