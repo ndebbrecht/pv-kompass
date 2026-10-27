@@ -34,3 +34,9 @@ fastlane pilot upload --ipa build/export/PVKompass.ipa --api_key_path "$ASC_API_
 Simulator-Demomodus ist nur unter `targetEnvironment(simulator)` und explizitem Launchargument aktiv. Er ist auf physischen Geräten nicht verfügbar.
 
 Update: Developer-Lizenzannahme durch Apple-Mail um 12:12 Uhr bestätigt; API-Zugang nach Verzögerung freigegeben. Bundle-ID und App-Store-Profil mit vorhandener Identität erfolgreich erstellt. App-Neuanlage per API nachweislich nicht erlaubt (CREATE→403); Niklas um einmalige Anlage auf der Website gebeten.
+
+## Upload am 27.10.2026, 13:13 Uhr
+
+Niklas hat den ASC-App-Eintrag angelegt: App-ID `6827541265`, Bundle-ID wie geplant, Sprache de-DE. Die signierte IPA wurde um 13:13:32 erfolgreich von App Store Connect angenommen. Version 1.0.0, Build 1. Apple-Verarbeitung und installierbarer TestFlight-Zugang sind noch zu prüfen.
+
+Interne Gruppe „Niklas – intern“ angelegt (`cc22a1b4-18b5-4c4b-bd1f-a47bb41741d1`), nur Niklas zugeordnet. BetaTester-IDs sind hier app-spezifisch: Wiederverwenden der KnowDown-ID ergab 409; POST betaTesters mit derselben E-Mail und neuer Gruppenrelation erzeugte den passenden PV-Kompass-Tester `958e0f11-b470-42ab-8055-e017776f80d1`. Andere Apps/Tester unverändert.
