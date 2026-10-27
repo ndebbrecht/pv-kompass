@@ -30,3 +30,5 @@ Aktuelle detaillierte Logs, XCResult-Bundles und MCP-Screenshots liegen in Alfre
 
 - `screenshots/01-messung.jpg`: finaler Messungsbildschirm, per MCP aufgenommen und visuell geprüft.
 - `screenshots/02-detail-frueher-pruefstand.jpg`: Detailansicht aus einem früheren Prüflauf; ausdrücklich gekennzeichnete Simulator-Beispielmessung ohne GPS.
+
+GitLab-CI-YAML zusätzlich mit dem GitLab-eigenen YamlProcessor geprüft: keine Fehler, keine Warnungen.
