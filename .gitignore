@@ -1,0 +1,11 @@
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+.env
+*.p8
+*.mobileprovision
+*.p12
+.DS_Store
+
+.xcodebuildmcp/

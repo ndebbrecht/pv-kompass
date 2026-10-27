@@ -1,0 +1,60 @@
+name: PVKompass
+options:
+  bundleIdPrefix: com.debbrecht
+  deploymentTarget:
+    iOS: '17.0'
+settings:
+  base:
+    SWIFT_VERSION: '5.9'
+    DEVELOPMENT_TEAM: 4V346NPC35
+    MARKETING_VERSION: '1.0.0'
+    CURRENT_PROJECT_VERSION: '1'
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    CODE_SIGN_STYLE: Automatic
+    TARGETED_DEVICE_FAMILY: '1'
+targets:
+  PVKompass:
+    type: application
+    platform: iOS
+    sources: [PVKompass]
+    info:
+      path: PVKompass/Info.plist
+      properties:
+        CFBundleDisplayName: PV Kompass
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleDevelopmentRegion: de
+        ITSAppUsesNonExemptEncryption: false
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
+        NSLocationWhenInUseUsageDescription: Dein Standort wird nur während einer Messung für geografisch Nord und die GPS-Angaben im lokalen Messverlauf verwendet.
+        NSMotionUsageDescription: Bewegungssensoren und Kompass ermitteln Neigung und Ausrichtung deiner PV-Module.
+    settings:
+      base:
+        TARGETED_DEVICE_FAMILY: '1'
+        PRODUCT_BUNDLE_IDENTIFIER: com.debbrecht.pvkompass
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+  PVKompassTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [PVKompassTests]
+    dependencies: [{target: PVKompass}]
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+  PVKompassUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [PVKompassUITests]
+    dependencies: [{target: PVKompass}]
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  PVKompass:
+    build:
+      targets:
+        PVKompass: all
+    test:
+      targets: [PVKompassTests, PVKompassUITests]
+      gatherCoverageData: true

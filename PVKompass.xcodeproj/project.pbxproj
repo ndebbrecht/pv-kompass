@@ -1,0 +1,538 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		10B82A20D1E93204A598248F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FC22AF3FFA4E90EA1B2BC3F /* Assets.xcassets */; };
+		2742EC6F6EA6C971E8B31F49 /* SensorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CD634ECBDD4A5A39F080FE /* SensorService.swift */; };
+		2D2C940208CD261F242954AA /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 70D8CD346577DAEC35217C96 /* PrivacyInfo.xcprivacy */; };
+		617E15147FAD972A9B9A8573 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFABFAFE4A1EE94D0E14604 /* Models.swift */; };
+		86B08D8E0917FBEADEA5D0D7 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49580167DC78FEA0B4E316A /* Views.swift */; };
+		9FBDAEFA62D5638CD86BB53E /* PVKompassUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E97FCCA2726D9E65FB4ECAB /* PVKompassUITests.swift */; };
+		A6FA4FFF524C3A25D9E6ABD1 /* PVKompassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80945ECD72C4C2C8119966ED /* PVKompassApp.swift */; };
+		C4B961E802D30136E17EE1BC /* PVKompassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BF1B5EDBD16BD728E104C7 /* PVKompassTests.swift */; };
+		F4EE8ED56213DC904AFF26E7 /* MeasurementStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CE332535C40646EBA2172 /* MeasurementStore.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E0BBA115FBD5327EDC3FDBD1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC26E4901DCA56D253D127FF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 56A7B1F12C4332D1187B98E9;
+			remoteInfo = PVKompass;
+		};
+		EEA9BC5CF98B50A3ADDC7ED3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC26E4901DCA56D253D127FF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 56A7B1F12C4332D1187B98E9;
+			remoteInfo = PVKompass;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2924E9B1AD22BDF97AD93E00 /* PVKompassUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = PVKompassUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E97FCCA2726D9E65FB4ECAB /* PVKompassUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVKompassUITests.swift; sourceTree = "<group>"; };
+		4DA8D2F6C850D688809F6916 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4FC22AF3FFA4E90EA1B2BC3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5D5CE332535C40646EBA2172 /* MeasurementStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementStore.swift; sourceTree = "<group>"; };
+		70D8CD346577DAEC35217C96 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		80945ECD72C4C2C8119966ED /* PVKompassApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVKompassApp.swift; sourceTree = "<group>"; };
+		B7BF1B5EDBD16BD728E104C7 /* PVKompassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVKompassTests.swift; sourceTree = "<group>"; };
+		BEFABFAFE4A1EE94D0E14604 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		D000AA4F186798A86606572C /* PVKompassTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = PVKompassTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DED8EC25D7D117EC82D0B6E5 /* PVKompass.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PVKompass.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E49580167DC78FEA0B4E316A /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
+		F4CD634ECBDD4A5A39F080FE /* SensorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorService.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		595D0332A51315FD0A6C07D9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DED8EC25D7D117EC82D0B6E5 /* PVKompass.app */,
+				D000AA4F186798A86606572C /* PVKompassTests.xctest */,
+				2924E9B1AD22BDF97AD93E00 /* PVKompassUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5B65022B62EDE9CEA03A3313 /* PVKompass */ = {
+			isa = PBXGroup;
+			children = (
+				4FC22AF3FFA4E90EA1B2BC3F /* Assets.xcassets */,
+				4DA8D2F6C850D688809F6916 /* Info.plist */,
+				5D5CE332535C40646EBA2172 /* MeasurementStore.swift */,
+				BEFABFAFE4A1EE94D0E14604 /* Models.swift */,
+				70D8CD346577DAEC35217C96 /* PrivacyInfo.xcprivacy */,
+				80945ECD72C4C2C8119966ED /* PVKompassApp.swift */,
+				F4CD634ECBDD4A5A39F080FE /* SensorService.swift */,
+				E49580167DC78FEA0B4E316A /* Views.swift */,
+			);
+			path = PVKompass;
+			sourceTree = "<group>";
+		};
+		9E02D3E4C5E9A8320C34C980 = {
+			isa = PBXGroup;
+			children = (
+				5B65022B62EDE9CEA03A3313 /* PVKompass */,
+				9FD7A16E0B9A947AD728D911 /* PVKompassTests */,
+				9FA7B805EEDEA950CC96F7B4 /* PVKompassUITests */,
+				595D0332A51315FD0A6C07D9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9FA7B805EEDEA950CC96F7B4 /* PVKompassUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3E97FCCA2726D9E65FB4ECAB /* PVKompassUITests.swift */,
+			);
+			path = PVKompassUITests;
+			sourceTree = "<group>";
+		};
+		9FD7A16E0B9A947AD728D911 /* PVKompassTests */ = {
+			isa = PBXGroup;
+			children = (
+				B7BF1B5EDBD16BD728E104C7 /* PVKompassTests.swift */,
+			);
+			path = PVKompassTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		56A7B1F12C4332D1187B98E9 /* PVKompass */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9603B3046C0BCF3A2783A841 /* Build configuration list for PBXNativeTarget "PVKompass" */;
+			buildPhases = (
+				F6DEF687FA5426E43C47B85C /* Sources */,
+				EA24F0DDDE2C1ACA8679FD6A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PVKompass;
+			packageProductDependencies = (
+			);
+			productName = PVKompass;
+			productReference = DED8EC25D7D117EC82D0B6E5 /* PVKompass.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ACACEF9306E546411ABE9627 /* PVKompassTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 12D6EDC090AB61A3445BABA9 /* Build configuration list for PBXNativeTarget "PVKompassTests" */;
+			buildPhases = (
+				763E1782CFB80654E5DEBEEF /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3EC2E35BE80779B249491E5B /* PBXTargetDependency */,
+			);
+			name = PVKompassTests;
+			packageProductDependencies = (
+			);
+			productName = PVKompassTests;
+			productReference = D000AA4F186798A86606572C /* PVKompassTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B11DA04D7C54F7459FC823B6 /* PVKompassUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC445CDE4DDD8D2A2F1A085D /* Build configuration list for PBXNativeTarget "PVKompassUITests" */;
+			buildPhases = (
+				BDFFB774CBA52641E309F477 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				47BF99A87AF6CE7EA0E68B59 /* PBXTargetDependency */,
+			);
+			name = PVKompassUITests;
+			packageProductDependencies = (
+			);
+			productName = PVKompassUITests;
+			productReference = 2924E9B1AD22BDF97AD93E00 /* PVKompassUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EC26E4901DCA56D253D127FF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					56A7B1F12C4332D1187B98E9 = {
+						DevelopmentTeam = 4V346NPC35;
+						ProvisioningStyle = Automatic;
+					};
+					ACACEF9306E546411ABE9627 = {
+						DevelopmentTeam = 4V346NPC35;
+						ProvisioningStyle = Automatic;
+					};
+					B11DA04D7C54F7459FC823B6 = {
+						DevelopmentTeam = 4V346NPC35;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 56A7B1F12C4332D1187B98E9;
+					};
+				};
+			};
+			buildConfigurationList = E105EF34EF702813704BD1D6 /* Build configuration list for PBXProject "PVKompass" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 9E02D3E4C5E9A8320C34C980;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 595D0332A51315FD0A6C07D9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				56A7B1F12C4332D1187B98E9 /* PVKompass */,
+				ACACEF9306E546411ABE9627 /* PVKompassTests */,
+				B11DA04D7C54F7459FC823B6 /* PVKompassUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EA24F0DDDE2C1ACA8679FD6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10B82A20D1E93204A598248F /* Assets.xcassets in Resources */,
+				2D2C940208CD261F242954AA /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		763E1782CFB80654E5DEBEEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4B961E802D30136E17EE1BC /* PVKompassTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BDFFB774CBA52641E309F477 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FBDAEFA62D5638CD86BB53E /* PVKompassUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6DEF687FA5426E43C47B85C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4EE8ED56213DC904AFF26E7 /* MeasurementStore.swift in Sources */,
+				617E15147FAD972A9B9A8573 /* Models.swift in Sources */,
+				A6FA4FFF524C3A25D9E6ABD1 /* PVKompassApp.swift in Sources */,
+				2742EC6F6EA6C971E8B31F49 /* SensorService.swift in Sources */,
+				86B08D8E0917FBEADEA5D0D7 /* Views.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3EC2E35BE80779B249491E5B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 56A7B1F12C4332D1187B98E9 /* PVKompass */;
+			targetProxy = E0BBA115FBD5327EDC3FDBD1 /* PBXContainerItemProxy */;
+		};
+		47BF99A87AF6CE7EA0E68B59 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 56A7B1F12C4332D1187B98E9 /* PVKompass */;
+			targetProxy = EEA9BC5CF98B50A3ADDC7ED3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0CF0456E90ADE8220150C8FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.debbrecht.PVKompassUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PVKompass;
+			};
+			name = Debug;
+		};
+		17BA65B18977B3608D7281B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4V346NPC35;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		19F49EA881FCA663DDF6C61B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = PVKompass/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.debbrecht.pvkompass;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		3378D86E28A19092D937875A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.debbrecht.PVKompassTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PVKompass.app/PVKompass";
+			};
+			name = Release;
+		};
+		40C7CD8A45F4C040EAE9526C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.debbrecht.PVKompassUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PVKompass;
+			};
+			name = Release;
+		};
+		5EF0F93CE65DB87D2653E00B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 4V346NPC35;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		8CB69F6F3D5B93796A48CB0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = PVKompass/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.debbrecht.pvkompass;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		FC046322FD9A0707DB4CE9FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.debbrecht.PVKompassTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PVKompass.app/PVKompass";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		12D6EDC090AB61A3445BABA9 /* Build configuration list for PBXNativeTarget "PVKompassTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC046322FD9A0707DB4CE9FB /* Debug */,
+				3378D86E28A19092D937875A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9603B3046C0BCF3A2783A841 /* Build configuration list for PBXNativeTarget "PVKompass" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				19F49EA881FCA663DDF6C61B /* Debug */,
+				8CB69F6F3D5B93796A48CB0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AC445CDE4DDD8D2A2F1A085D /* Build configuration list for PBXNativeTarget "PVKompassUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0CF0456E90ADE8220150C8FE /* Debug */,
+				40C7CD8A45F4C040EAE9526C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E105EF34EF702813704BD1D6 /* Build configuration list for PBXProject "PVKompass" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17BA65B18977B3608D7281B1 /* Debug */,
+				5EF0F93CE65DB87D2653E00B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EC26E4901DCA56D253D127FF /* Project object */;
+}
