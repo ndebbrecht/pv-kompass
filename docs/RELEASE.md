@@ -46,3 +46,14 @@ Interne Gruppe „Niklas – intern“ angelegt (`cc22a1b4-18b5-4c4b-bd1f-a47bb4
 Apple-Verarbeitung abgeschlossen. Build `520c48af-36a8-4c3c-ad01-c21598ebf9f5` (1.0.0 / 1) hat `processingState=VALID`, `usesNonExemptEncryption=false` und `internalBuildState=IN_BETA_TESTING`. Interne Gruppe enthält diesen Build und Niklas. Testerstatus von Apple: `INSTALLED` (dies ist Apples API-Status, kein unabhängiger Nachweis eines physischen Tests). Deutsche Testhinweise gespeichert. Keine externe Beta-Review oder öffentliche Veröffentlichung ausgelöst.
 
 Installation: TestFlight auf Niklas’ iPhone öffnen, PV Kompass auswählen und installieren. Voraussetzung iOS 17 oder neuer. 18/18 Simulator-Tests via Xcode-MCP bestanden; echte Sensorqualität und VoiceOver-Bedienung durch Niklas bleiben reale Gerätetests.
+
+## Build 2 – Rückmeldungen vom ersten Gerätetest
+
+- Unbestimmbare Ausrichtung wird direkt im Ergebnis und im Detail erklärt; bei unter 3° Neigung zeigt die Flächennormale nahezu nach oben, eine Himmelsrichtung wäre irreführend. Auch die HA-Erklärung enthält diesen Grund.
+- Vorbereitung wartet auf die Entscheidung im Standortdialog und eine aktive App. Messzeit und Sensordatensammlung beginnen erst danach. Standortverweigerung erlaubt weiterhin eine ausdrücklich markierte Messung ohne GPS. Inaktive Systemdialoge brechen die Messung nicht mehr ab; echter Hintergrundbetrieb dagegen schon.
+- VoiceOver erhält nach dem Start eine explizite, verzögerte und eingereihte Startansage, zusätzlich zu haptischem Feedback. Abschlussansage nennt bei fehlender Ausrichtung den Grund.
+- CSV-Teilen liegt oben rechts in der Titelleiste, sowohl auf dem Messscreen nach Abschluss als auch im Messdetail. Kein Scrollen bis ans Listenende erforderlich.
+
+Der Standort-Warteablauf wird zusätzlich mit einem expliziten Simulator-Fixture geprüft. Dieses Fixture ist nicht auf physischen Geräten verfügbar. Den realen iOS-Freigabedialog und gesprochene VoiceOver-Ansagen muss Niklas weiterhin am Gerät gegenprüfen.
+
+Build 2 ist verarbeitet und für Niklas in der internen TestFlight-Gruppe verfügbar. Build-ID `bdbecea1-1a16-4da3-a329-cf9280ae3843`, `VALID`, `IN_BETA_TESTING`, Export-Compliance unverändert `usesNonExemptEncryption=false`. Gruppen-Zuordnung nach Verarbeitung separat geprüft; deutsche Releasehinweise gespeichert.

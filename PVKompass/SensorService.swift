@@ -4,7 +4,7 @@ import CoreLocation
 import UIKit
 
 @MainActor final class SensorService: NSObject, ObservableObject, @preconcurrency CLLocationManagerDelegate {
-    enum Phase: Equatable { case ready, measuring, finished, failed }
+    enum Phase: Equatable { case ready, preparing, measuring, finished, failed }
     @Published private(set) var phase: Phase = .ready
     @Published private(set) var status = "Bereit für deine erste Messung."
     @Published private(set) var progress: Double = 0
@@ -27,6 +27,11 @@ import UIKit
     private var onComplete: ((PanelMeasurement) -> Void)?
     private var totalSamples = 0
     private var usingDemo = false
+    private var startGate = MeasurementStartGate()
+    private var delayedStartAnnouncement: Task<Void, Never>?
+    #if targetEnvironment(simulator)
+    private var demoPermissionTimer: Timer?
+    #endif
 
     override init() {
         super.init()
@@ -39,30 +44,78 @@ import UIKit
         result = nil; error = nil; progress = 0; latestTilt = nil; latestAzimuth = nil
         position = nil; heading = nil; reference = .magnetic
         window = SampleWindow(); totalSamples = 0; invalidSince = nil
-        startedAt = Date(); self.onComplete = onComplete; phase = .measuring
-        status = "iPhone ruhig liegen lassen. Die Rückseite liegt am Modul, der Bildschirm zeigt nach außen."
-        announce(status, force: true)
+        self.onComplete = onComplete; phase = .preparing
+        status = "Messung wird vorbereitet."
+        startGate.permission = .undecided
         UIApplication.shared.isIdleTimerDisabled = true
         #if targetEnvironment(simulator)
-        // Explicit opt-in UI-test fixture. Never active on physical iPhones.
-        if ProcessInfo.processInfo.arguments.contains("--ui-testing-demo") {
-            usingDemo = true
+        // Explicit simulator-only fixtures, never enabled on a physical iPhone.
+        usingDemo = ProcessInfo.processInfo.arguments.contains("--ui-testing-demo")
+        if usingDemo {
+            if ProcessInfo.processInfo.arguments.contains("--ui-testing-permission-delay") {
+                locationStatus = "Bitte entscheide über den Standortzugriff. Die Messung wartet."
+                status = "Warte auf Standortfreigabe. Noch keine Messung gestartet."
+                demoPermissionTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { [weak self] _ in
+                    Task { @MainActor in
+                        guard let self, self.phase == .preparing else { return }
+                        self.startGate.permission = .allowed
+                        self.beginWhenReady()
+                    }
+                }
+            } else {
+                startGate.permission = .allowed
+                beginWhenReady()
+            }
+            return
+        }
+        #endif
+        usingDemo = false
+        guard motion.isDeviceMotionAvailable,
+              CMMotionManager.availableAttitudeReferenceFrames().contains(.xMagneticNorthZVertical) else {
+            fail("Die benötigten Bewegungs- und Kompasssensoren sind auf diesem Gerät nicht verfügbar.")
+            return
+        }
+        updatePermission(location.authorizationStatus)
+        if location.authorizationStatus == .notDetermined {
+            status = "Warte auf Standortfreigabe. Noch keine Messung gestartet."
+            announce("Bitte entscheide über den Standortzugriff. Die Messung startet erst danach.", force: true)
+            location.requestWhenInUseAuthorization()
+        } else { beginWhenReady() }
+    }
+    private func updatePermission(_ authorization: CLAuthorizationStatus) {
+        switch authorization {
+        case .authorizedAlways, .authorizedWhenInUse:
+            startGate.permission = .allowed
+            locationStatus = "Standort freigegeben. Suche GPS-Position."
+        case .denied, .restricted:
+            startGate.permission = .unavailable
+            locationStatus = "Standort nicht freigegeben. GPS fehlt; Ausrichtung nur magnetisch."
+            heading = nil; position = nil
+        default:
+            startGate.permission = .undecided
+            locationStatus = "Bitte entscheide über den Standortzugriff. Die Messung wartet."
+        }
+    }
+    private func beginWhenReady() {
+        guard phase == .preparing, startGate.canBegin else { return }
+        // Time spent in the system permission dialog is not measurement time.
+        startedAt = Date(); phase = .measuring
+        status = "Messung gestartet. iPhone ruhig liegen lassen."
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
+        delayedStartAnnouncement = Task { @MainActor [weak self] in
+            try? await Task.sleep(nanoseconds: 650_000_000)
+            guard !Task.isCancelled, let self, self.phase == .measuring, self.startGate.isAppActive else { return }
+            self.announce("Messung gestartet. Das iPhone bitte ruhig auf der Fläche liegen lassen.", force: true)
+        }
+        #if targetEnvironment(simulator)
+        if usingDemo {
             timer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] _ in
                 Task { @MainActor in self?.demoTick() }
             }
             return
         }
         #endif
-        guard motion.isDeviceMotionAvailable,
-              CMMotionManager.availableAttitudeReferenceFrames().contains(.xMagneticNorthZVertical) else {
-            fail("Die benötigten Bewegungs- und Kompasssensoren sind auf diesem Gerät nicht verfügbar.")
-            return
-        }
-        usingDemo = false
-        location.requestWhenInUseAuthorization()
-        if location.authorizationStatus == .authorizedWhenInUse || location.authorizationStatus == .authorizedAlways {
-            location.startUpdatingLocation()
-        }
+        if startGate.permission == .allowed { location.startUpdatingLocation() }
         if CLLocationManager.headingAvailable() { location.startUpdatingHeading() }
         motion.showsDeviceMovementDisplay = true
         motion.deviceMotionUpdateInterval = 1.0/20
@@ -76,13 +129,18 @@ import UIKit
         }
     }
     func cancel() {
-        guard phase == .measuring else { return }
+        guard phase == .measuring || phase == .preparing else { return }
         stopSensors(); phase = .ready; progress = 0
         status = "Messung abgebrochen. Es wurde nichts gespeichert."
         announce(status, force: true)
     }
+    func applicationActivityChanged(isActive: Bool, enteredBackground: Bool) {
+        startGate.isAppActive = isActive
+        if enteredBackground { interrupt() }
+        else if isActive { beginWhenReady() }
+    }
     func interrupt() {
-        if phase == .measuring {
+        if phase == .measuring || phase == .preparing {
             stopSensors(); phase = .ready; progress = 0
             status = "Messung unterbrochen. Bitte im Vordergrund neu starten."
         }
@@ -99,7 +157,7 @@ import UIKit
         return heading.trueHeading - heading.magneticHeading
     }
     private func consume(_ data: CMDeviceMotion) {
-        guard phase == .measuring else { return }
+        guard phase == .measuring, startGate.isAppActive else { return }
         let g = data.gravity; let f = data.magneticField.field
         let magnetic = Vector3(x: f.x,y: f.y,z: f.z)
         let correction = declination
@@ -137,7 +195,7 @@ import UIKit
         if window.isStable && elapsed >= 6 && (reference == .geographic || elapsed >= 18) { finish() }
     }
     private func checkTimeout() {
-        guard phase == .measuring else { return }
+        guard phase == .measuring, startGate.isAppActive else { return }
         if Date().timeIntervalSince(startedAt) >= 40 {
             fail("Keine ausreichend stabile Messung möglich. Prüfe die Auflage und entferne magnetische Hüllen. Kalibriere den Kompass abseits der Halterung und starte erneut. Es wurde kein unsicheres Ergebnis gespeichert.")
         }
@@ -166,11 +224,19 @@ import UIKit
         status = "Messung abgeschlossen."
         onComplete?(m)
         UINotificationFeedbackGenerator().notificationOccurred(.success)
-        announce("Messung abgeschlossen. Neigung \(m.tilt.formatted(.number.precision(.fractionLength(1)))) Grad. \(m.northReference.title). Ergebnis steht unten.", force:true)
+        announce("Messung abgeschlossen. Neigung \(m.tilt.formatted(.number.precision(.fractionLength(1)))) Grad. " + (m.azimuthUnavailableReason ?? m.northReference.title) + " Ergebnis steht unten.", force:true)
     }
     private func demoTick() {
         progress += 0.12
-        if progress >= 1 { complete(.example()) }
+        if progress >= 1 {
+            var m = PanelMeasurement.example()
+            #if targetEnvironment(simulator)
+            if ProcessInfo.processInfo.arguments.contains("--ui-testing-flat") {
+                m.tilt = 1.13; m.azimuth = nil; m.azimuthSpread = nil
+            }
+            #endif
+            complete(m)
+        }
     }
     private func fail(_ message: String) {
         stopSensors(); phase = .failed; error = message; status = "Messung nicht möglich."
@@ -178,6 +244,10 @@ import UIKit
         announce(message, force:true)
     }
     private func stopSensors() {
+        delayedStartAnnouncement?.cancel(); delayedStartAnnouncement = nil
+        #if targetEnvironment(simulator)
+        demoPermissionTimer?.invalidate(); demoPermissionTimer = nil
+        #endif
         timer?.invalidate(); timer = nil
         motion.stopDeviceMotionUpdates(); location.stopUpdatingHeading(); location.stopUpdatingLocation()
         UIApplication.shared.isIdleTimerDisabled = false
@@ -188,19 +258,14 @@ import UIKit
     private func announce(_ message: String, force: Bool = false) {
         guard force || Date().timeIntervalSince(lastAnnouncement) > 8 else { return }
         lastAnnouncement = Date()
-        UIAccessibility.post(notification: .announcement, argument: message)
+        let speech = NSAttributedString(string: message, attributes: [.accessibilitySpeechQueueAnnouncement: true])
+        UIAccessibility.post(notification: .announcement, argument: speech)
     }
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        guard phase == .measuring else { return }
-        switch manager.authorizationStatus {
-        case .authorizedAlways, .authorizedWhenInUse:
-            locationStatus = "Standort freigegeben. Suche GPS-Position."
-            manager.startUpdatingLocation()
-        case .denied, .restricted:
-            locationStatus = "Standort nicht freigegeben. GPS fehlt; Ausrichtung nur magnetisch."
-            heading = nil; position = nil
-        default: locationStatus = "Bitte entscheide über den Standortzugriff."
-        }
+        guard phase == .preparing || phase == .measuring else { return }
+        updatePermission(manager.authorizationStatus)
+        if phase == .preparing { beginWhenReady() }
+        else if startGate.permission == .allowed { manager.startUpdatingLocation() }
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard phase == .measuring, let latest = locations.last,

@@ -24,13 +24,47 @@ final class PVKompassUITests: XCTestCase {
         let saved = app.staticTexts["Testmodul Süd"].firstMatch
         XCTAssertTrue(saved.waitForExistence(timeout:5))
         saved.tap()
-        app.swipeUp(); app.swipeUp(); app.swipeUp()
-        let export = app.buttons["exportCSV"]
-        if !export.isHittable { app.swipeUp() }
+        let export = app.navigationBars.buttons["exportCSV"]
+        XCTAssertTrue(export.isHittable, "Teilen muss ohne Scrollen oben rechts erreichbar sein")
         XCTAssertTrue(export.waitForExistence(timeout:3))
         export.tap()
         XCTAssertTrue(app.otherElements["ActivityListView"].waitForExistence(timeout:5) || app.buttons["Copy"].exists || app.buttons["Kopieren"].exists || app.buttons["Close"].exists || app.buttons["Schließen"].exists)
         let shot = XCTAttachment(screenshot:app.screenshot()); shot.name = "Native CSV share sheet"; shot.lifetime = .keepAlways; add(shot)
+    }
+    @MainActor func testFirstMeasurementWaitsForPermissionThenCompletes() {
+        let app = XCUIApplication()
+        app.launchArguments = ["--ui-testing-demo", "--ui-testing-permission-delay"]
+        app.launch()
+        app.buttons["startMeasurement"].tap()
+        XCTAssertTrue(app.staticTexts["Warte auf Standortfreigabe. Noch keine Messung gestartet."].waitForExistence(timeout:1))
+        XCTAssertFalse(app.buttons["showResult"].exists)
+        XCTAssertTrue(app.buttons["Messung abbrechen"].exists)
+        XCTAssertTrue(app.buttons["showResult"].waitForExistence(timeout:12))
+        XCTAssertFalse(app.staticTexts["measurementError"].exists)
+    }
+    @MainActor func testCancelWhileWaitingDoesNotStartLater() {
+        let app = XCUIApplication()
+        app.launchArguments = ["--ui-testing-demo", "--ui-testing-permission-delay"]
+        app.launch()
+        app.buttons["startMeasurement"].tap()
+        app.buttons["Messung abbrechen"].tap()
+        XCTAssertTrue(app.buttons["startMeasurement"].exists)
+        XCTAssertFalse(app.buttons["showResult"].waitForExistence(timeout:4))
+    }
+    @MainActor func testFlatExplanationAndShareInTitleBar() {
+        let app = XCUIApplication()
+        app.launchArguments = ["--ui-testing-demo", "--ui-testing-flat"]
+        app.launch()
+        app.buttons["startMeasurement"].tap()
+        let share = app.navigationBars.buttons["shareCurrentMeasurement"]
+        XCTAssertTrue(share.waitForExistence(timeout:12))
+        XCTAssertTrue(share.isHittable)
+        let explanation = app.descendants(matching:.any).matching(NSPredicate(format:"value CONTAINS %@", "keine eindeutige Himmelsrichtung")).firstMatch
+        if !explanation.exists { app.swipeUp() }
+        XCTAssertTrue(explanation.exists, "VoiceOver-Ergebnis muss den Grund der fehlenden Ausrichtung enthalten")
+        share.tap()
+        XCTAssertTrue(app.otherElements["ActivityListView"].waitForExistence(timeout:5) || app.buttons["Close"].exists || app.buttons["Schließen"].exists)
+        let shot = XCTAttachment(screenshot:app.screenshot()); shot.name = "CSV direkt aus Messung"; shot.lifetime = .keepAlways; add(shot)
     }
     @MainActor func testStartScreenAccessibility() throws {
         let app = XCUIApplication(); app.launch()

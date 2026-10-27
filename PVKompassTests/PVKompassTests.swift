@@ -130,3 +130,33 @@ final class ExportTests: XCTestCase {
         XCTAssertEqual(try Data(contentsOf:url),original)
     }
 }
+
+final class MeasurementStartTests: XCTestCase {
+    func testPermissionWaitAndSystemDialogDoNotStartMeasurement() {
+        var gate = MeasurementStartGate()
+        XCTAssertFalse(gate.canBegin)
+        gate.isAppActive = false
+        gate.permission = .allowed
+        XCTAssertFalse(gate.canBegin, "Grant callback may arrive before the permission dialog closes")
+        gate.isAppActive = true
+        XCTAssertTrue(gate.canBegin)
+    }
+    func testDeniedLocationStillPermitsExplicitlyFlaggedMeasurement() {
+        var gate = MeasurementStartGate()
+        gate.permission = .unavailable
+        XCTAssertTrue(gate.canBegin)
+        gate.isAppActive = false
+        XCTAssertFalse(gate.canBegin)
+    }
+    func testFlatResultExplainsMissingBearingAndHAValues() {
+        var m = PanelMeasurement.example(); m.isDemo = false; m.tilt = 1.13; m.azimuth = nil
+        XCTAssertTrue(m.azimuthUnavailableReason?.contains("waagerecht") == true)
+        XCTAssertTrue(m.azimuthUnavailableReason?.contains("keine eindeutige Himmelsrichtung") == true)
+        XCTAssertEqual(m.haText, m.azimuthUnavailableReason)
+        XCTAssertFalse(m.canCopyHA)
+        m.tilt = 35
+        XCTAssertTrue(m.azimuthUnavailableReason?.contains("keine verlässliche Richtungsmessung") == true)
+        m.azimuth = 180
+        XCTAssertNil(m.azimuthUnavailableReason)
+    }
+}

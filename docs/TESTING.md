@@ -32,3 +32,13 @@ Aktuelle detaillierte Logs, XCResult-Bundles und MCP-Screenshots liegen in Alfre
 - `screenshots/02-detail-frueher-pruefstand.jpg`: Detailansicht aus einem früheren Prüflauf; ausdrücklich gekennzeichnete Simulator-Beispielmessung ohne GPS.
 
 GitLab-CI-YAML zusätzlich mit dem GitLab-eigenen YamlProcessor geprüft: keine Fehler, keine Warnungen.
+
+## Build 2
+
+Vollständiger Xcode-MCP-Lauf: 24 Tests, 24 bestanden, 0 fehlgeschlagen, 0 übersprungen. Zusätzlich zum bisherigen Umfang: Standortentscheidung und App-Aktivität als Startbedingung, verweigerter Standortzugriff, verständliche Erklärung für fehlende Ausrichtung, verzögerte Erstfreigabe, Abbruch während der Vorbereitung sowie nativer CSV-Share direkt aus der Titelleiste.
+
+Startansage ist explizit, um 650 ms verzögert und als VoiceOver-Warteschlangenansage markiert. Der Simulator-Test bestätigt nicht die tatsächlich gehörte Sprachausgabe oder den realen iOS-Erstfreigabedialog auf Niklas’ Gerät.
+
+MCP-Screenshot `screenshots/03-build2-waagerecht-und-teilen.jpg` nach realer MCP-UI-Navigation mit Simulator-Demodaten aufgenommen und visuell geprüft: Erklärung vollständig lesbar, CSV-Button oben rechts. MCP-Accessibility-Hierarchie bestätigt den vollständigen Begründungstext im Accessibility-Wert von „Ausrichtung“.
+
+Lokaler MCP-UI-Treiber AXe 1.8.0 ist vorhanden. Homebrew-Linking scheiterte an einem fremden Tailscale-Link; daher privaten MCP-Wrapper auf den absoluten Cellar-Pfad setzen. Die in der AXe-Formel vorgesehenen ad-hoc-Post-Install-Signaturen wurden gezielt nachgeholt. Keine Tailscale-Konfiguration verändert. Screenshot nach MCP-Testlauf erfordert gegebenenfalls erneutes `boot_sim`, da Tests den Simulator herunterfahren können.

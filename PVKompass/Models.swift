@@ -36,6 +36,13 @@ struct PanelMeasurement: Identifiable, Codable, Equatable {
     var headingAccuracy: Double?
     var warnings: [String]
     var isDemo = false
+    var azimuthUnavailableReason: String? {
+        guard azimuth == nil else { return nil }
+        if tilt < 3 {
+            return "Die Fläche liegt nahezu waagerecht (unter 3 Grad Neigung). Ihre Vorderseite zeigt fast senkrecht nach oben, deshalb lässt sich keine eindeutige Himmelsrichtung bestimmen. Die Neigung wurde trotzdem gemessen."
+        }
+        return "Es liegt keine verlässliche Richtungsmessung vor. Prüfe die Auflage und den Kompass und starte die Messung erneut."
+    }
     var forecastAzimuth: Double? {
         guard northReference == .geographic else { return nil }
         // At near-horizontal angles bearing is undefined, not silently invented.
@@ -44,7 +51,7 @@ struct PanelMeasurement: Identifiable, Codable, Equatable {
     var canCopyHA: Bool { !isDemo && forecastAzimuth != nil }
     var haText: String {
         guard let a = forecastAzimuth, !isDemo else {
-            return "Keine geografische Ausrichtung verfügbar. Bitte Messhinweise beachten."
+            return azimuthUnavailableReason ?? "Nur magnetisch Nord verfügbar. Für geografische HA-Werte werden Standortfreigabe und ein verlässlicher geografischer Kompassbezug benötigt."
         }
         return String(format: "Forecast.Solar (Home Assistant)\nNeigung: %.1f°\nAzimut: %.1f°\n0° Nord · 90° Ost · 180° Süd · 270° West", locale: Locale(identifier: "de_DE"), tilt, a)
     }
@@ -110,4 +117,12 @@ struct SampleWindow {
               samples.allSatisfy({ !$0.moving && $0.calibrated && (20...80).contains($0.fieldStrength) }) else { return false }
         return tiltMean < 3 || (azimuthSpread.map { $0 <= 6 } ?? false)
     }
+}
+
+/// Permission dialogs must finish before collecting samples or starting the timeout.
+struct MeasurementStartGate {
+    enum Permission { case undecided, allowed, unavailable }
+    var permission: Permission = .undecided
+    var isAppActive = true
+    var canBegin: Bool { permission != .undecided && isAppActive }
 }

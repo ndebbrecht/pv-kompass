@@ -5,8 +5,10 @@ struct MeasurementView: View {
     @EnvironmentObject private var store: MeasurementStore
     @EnvironmentObject private var sensor: SensorService
     @State private var showGuide = false
+    @State private var exportItem: ExportItem?
+    @State private var exportError: String?
     @AccessibilityFocusState private var startFocused: Bool
-    private var measuring: Bool { sensor.phase == .measuring }
+    private var measuring: Bool { sensor.phase == .measuring || sensor.phase == .preparing }
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
@@ -65,7 +67,21 @@ struct MeasurementView: View {
         .background(Color(.systemGroupedBackground))
         .navigationTitle("PV Kompass")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            if let result = sensor.result {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Als CSV teilen", systemImage: "square.and.arrow.up") {
+                        do { exportItem = ExportItem(url: try CSVExport.write(result)) }
+                        catch { exportError = "CSV konnte nicht erstellt werden." }
+                    }.accessibilityIdentifier("shareCurrentMeasurement")
+                }
+            }
+        }
         .sheet(isPresented: $showGuide) { GuideView() }
+        .sheet(item: $exportItem) { item in ActivitySheet(url: item.url) }
+        .alert("CSV-Export", isPresented: Binding(get: { exportError != nil }, set: { if !$0 { exportError = nil } })) {
+            Button("OK") { exportError = nil }
+        } message: { Text(exportError ?? "") }
     }
     private func start() {
         sensor.start { m in
@@ -82,7 +98,7 @@ struct ResultSummary: View {
             Text(measurement.isDemo ? "Demo-Ergebnis" : "Dein Messergebnis")
                 .font(.title2.bold()).accessibilityAddTraits(.isHeader)
             value("Neigung", measurement.tilt.formatted(.number.precision(.fractionLength(1))) + "°", detail:"Gegenüber der Waagerechten")
-            value("Ausrichtung", measurement.azimuth.map { $0.formatted(.number.precision(.fractionLength(1))) + "°" } ?? "Nicht bestimmbar", detail:measurement.northReference.title)
+            value("Ausrichtung", measurement.azimuth.map { $0.formatted(.number.precision(.fractionLength(1))) + "°" } ?? "Nicht bestimmbar", detail:measurement.azimuthUnavailableReason ?? measurement.northReference.title)
             if measurement.northReference == .magnetic {
                 Label("Nicht direkt als geografischen HA-Azimut übernehmen.", systemImage:"exclamationmark.triangle")
             }
@@ -153,6 +169,9 @@ struct MeasurementDetail: View {
             Section("Messergebnis") {
                 LabeledContent("Neigung",value:"\(measurement.tilt.formatted(.number.precision(.fractionLength(1)))) Grad")
                 LabeledContent("Azimut",value:measurement.azimuth.map { "\($0.formatted(.number.precision(.fractionLength(1)))) Grad" } ?? "Nicht bestimmbar")
+                if let reason = measurement.azimuthUnavailableReason {
+                    Text(reason).accessibilityIdentifier("azimuthUnavailableReason")
+                }
                 LabeledContent("Nordbezug",value:measurement.northReference.title)
                 Text("Neigung: 0° waagerecht, 90° senkrecht. Azimut: 0° Nord, 90° Ost, 180° Süd, 270° West.")
                     .font(.footnote).foregroundStyle(Color.readableSecondary)
@@ -193,15 +212,19 @@ struct MeasurementDetail: View {
                 ForEach(measurement.warnings,id:\.self) { Text($0) }
             }
             Section {
-                Button("Als CSV teilen",systemImage:"square.and.arrow.up") {
-                    do { exportItem = ExportItem(url:try CSVExport.write(measurement)) }
-                    catch { message = "CSV konnte nicht erstellt werden: \(error.localizedDescription)" }
-                }.accessibilityIdentifier("exportCSV")
                 Button("Messung löschen",systemImage:"trash",role:.destructive) { delete = true }
             }
         }
         .navigationTitle("Messung")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("Als CSV teilen", systemImage: "square.and.arrow.up") {
+                    do { exportItem = ExportItem(url: try CSVExport.write(measurement)) }
+                    catch { message = "CSV konnte nicht erstellt werden: \(error.localizedDescription)" }
+                }.accessibilityIdentifier("exportCSV")
+            }
+        }
         .alert("Messung benennen",isPresented:$rename) {
             TextField("Name",text:$name).accessibilityIdentifier("measurementName")
             Button("Speichern") {
@@ -241,7 +264,7 @@ struct GuideView: View {
                     Text("Kamerabuckel und Hülle können die Auflage verkippen. Nutze bei Bedarf zwei gleich hohe, nicht magnetische Abstandshalter. Halte das iPhone gegen Abrutschen fest. Keine heißen oder schwer erreichbaren Modulflächen verwenden.")
                 }
                 Section("2. Messung starten") {
-                    Text("Tippe auf Messung starten. Lasse das Gerät ruhig liegen. Der Fortschritt zeigt die Sammlung von Sensorwerten; abgeschlossen wird erst bei einer stabilen Messung. Ein Signal und eine VoiceOver-Ansage melden den Abschluss.")
+                    Text("Tippe auf Messung starten. Lasse das Gerät ruhig liegen. Der Fortschritt zeigt die Sammlung von Sensorwerten; abgeschlossen wird erst bei einer stabilen Messung. Die Standortfreigabe wird vor dem Messbeginn abgefragt. Ein Signal und eine VoiceOver-Ansage melden Start und Abschluss.")
                     Text("Bei einem Kalibrierungshinweis: iPhone aufnehmen, abseits von Metall und magnetischem Zubehör bewegen und wieder auflegen. Nicht auf dem Glas hin- und herschieben.")
                 }
                 Section("3. Ergebnis prüfen") {
