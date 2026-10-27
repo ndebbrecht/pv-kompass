@@ -25,3 +25,8 @@ Am 27.10.2026: **18/18 Tests bestanden**, ausgeführt über XcodeBuildMCP (`test
 - TestFlight-Upload und tatsächliche Bereitstellung werden separat nachgewiesen; ein Simulator-Erfolg ist kein TestFlight-Nachweis.
 
 Aktuelle detaillierte Logs, XCResult-Bundles und MCP-Screenshots liegen in Alfreds privaten Release-Arbeitsdateien bzw. lokalem ignoriertem build-Verzeichnis; keine Zugangsdaten oder fremden App-Daten im Repository.
+
+## MCP-Screenshots
+
+- `screenshots/01-messung.jpg`: finaler Messungsbildschirm, per MCP aufgenommen und visuell geprüft.
+- `screenshots/02-detail-frueher-pruefstand.jpg`: Detailansicht aus einem früheren Prüflauf; ausdrücklich gekennzeichnete Simulator-Beispielmessung ohne GPS.
