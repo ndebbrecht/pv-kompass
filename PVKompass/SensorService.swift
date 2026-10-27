@@ -145,6 +145,11 @@ import UIKit
             status = "Messung unterbrochen. Bitte im Vordergrund neu starten."
         }
     }
+    func forgetResults(ids: Set<UUID>) {
+        guard let result, ids.contains(result.id) else { return }
+        self.result = nil; phase = .ready; progress = 0; error = nil
+        status = "Messung aus dem Verlauf gelöscht. Bereit für eine neue Messung."
+    }
     func reportSaveFailure() {
         error = "Das Ergebnis konnte nicht gespeichert werden. Du kannst die Werte weiterhin hier ablesen und die Messung erneut starten."
         announce(error!, force: true)

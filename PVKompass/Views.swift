@@ -120,26 +120,81 @@ struct ResultSummary: View {
 
 struct HistoryView: View {
     @EnvironmentObject private var store: MeasurementStore
+    @State private var exportItem: ExportItem?
+    @State private var message: String?
+    @State private var deleteAll = false
+    @State private var deleteMeasurement: PanelMeasurement?
     var body: some View {
         Group {
             if store.measurements.isEmpty {
                 ContentUnavailableView("Noch keine Messungen", systemImage:"clock.arrow.circlepath", description:Text("Starte im Tab Messung. Abgeschlossene Messungen erscheinen hier automatisch mit Datum und Uhrzeit."))
+                    .accessibilityIdentifier("emptyHistory")
             } else {
-                List(store.measurements) { m in
-                    NavigationLink { MeasurementDetail(measurementID:m.id,fallback:m) } label: {
-                        VStack(alignment:.leading,spacing:6) {
-                            Text(m.name).font(.headline)
-                            Text(m.timestamp.formatted(date:.abbreviated,time:.shortened)).font(.subheadline)
-                            Text("\(m.tilt.formatted(.number.precision(.fractionLength(1))))° Neigung · \(m.azimuth.map { $0.formatted(.number.precision(.fractionLength(1))) + "°" } ?? "keine Richtung")")
-                                .font(.callout).foregroundStyle(Color.readableSecondary)
-                            if m.isDemo { Text("Demodaten").font(.caption.bold()) }
-                        }.padding(.vertical,4)
+                List {
+                    Section {
+                        ForEach(store.measurements) { m in
+                            NavigationLink { MeasurementDetail(measurementID:m.id,fallback:m) } label: {
+                                VStack(alignment:.leading,spacing:6) {
+                                    Text(m.name).font(.headline)
+                                    Text(m.timestamp.formatted(date:.abbreviated,time:.shortened)).font(.subheadline)
+                                    Text("\(m.tilt.formatted(.number.precision(.fractionLength(1))))° Neigung · \(m.azimuth.map { $0.formatted(.number.precision(.fractionLength(1))) + "°" } ?? "keine Richtung")")
+                                        .font(.callout).foregroundStyle(Color.readableSecondary)
+                                    if m.isDemo { Text("Demodaten").font(.caption.bold()) }
+                                }.padding(.vertical,4)
+                            }
+                            .accessibilityIdentifier("history-\(m.id)")
+                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                Button("Löschen", systemImage: "trash", role: .destructive) { deleteMeasurement = m }
+                            }
+                            .accessibilityAction(named: Text("Messung löschen")) { deleteMeasurement = m }
+                        }
+                    } header: {
+                        Text("\(store.measurements.count) Messungen")
                     }
-                    .accessibilityIdentifier("history-\(m.id)")
+                    Section {
+                        Button("Alle Messungen löschen", systemImage: "trash", role: .destructive) { deleteAll = true }
+                            .accessibilityIdentifier("deleteAllMeasurements")
+                    } footer: {
+                        Text("Löscht den gesamten lokalen Messverlauf. Du kannst ihn vorher oben rechts als CSV sichern.")
+                    }
                 }
             }
         }
         .navigationTitle("Messverlauf")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("Alle Messungen als CSV teilen", systemImage: "square.and.arrow.up") {
+                    do { exportItem = ExportItem(url: try CSVExport.write(store.measurements)) }
+                    catch { message = "Der Messverlauf konnte nicht als CSV erstellt werden." }
+                }
+                .accessibilityIdentifier("exportAllCSV")
+                .accessibilityHint("Teilt alle gespeicherten Messungen in einer CSV-Datei, einschließlich vorhandener GPS-Daten.")
+                .disabled(store.measurements.isEmpty)
+            }
+        }
+        .sheet(item: $exportItem) { item in ActivitySheet(url: item.url) }
+        .alert("Alle \(store.measurements.count) Messungen dauerhaft löschen?", isPresented: $deleteAll) {
+            Button("Alle Messungen endgültig löschen", role: .destructive) {
+                do {
+                    try store.deleteAll()
+                    UIAccessibility.post(notification: .announcement, argument: "Alle Messungen wurden gelöscht.")
+                } catch { message = "Die Messungen konnten nicht gelöscht werden. Der Verlauf bleibt erhalten." }
+            }
+            Button("Abbrechen", role: .cancel) {}
+        } message: { Text("Diese Aktion kann nicht rückgängig gemacht werden. Bereits geteilte CSV-Dateien werden nicht gelöscht.") }
+        .alert("Messung löschen?", isPresented: Binding(get: { deleteMeasurement != nil }, set: { if !$0 { deleteMeasurement = nil } }), presenting: deleteMeasurement) { measurement in
+            Button("Messung endgültig löschen", role: .destructive) {
+                do {
+                    try store.delete(id: measurement.id)
+                    UIAccessibility.post(notification: .announcement, argument: "Messung gelöscht.")
+                } catch { message = "Die Messung konnte nicht gelöscht werden." }
+                deleteMeasurement = nil
+            }
+            Button("Abbrechen", role: .cancel) { deleteMeasurement = nil }
+        } message: { measurement in Text(measurement.name) }
+        .alert("Hinweis", isPresented: Binding(get: { message != nil }, set: { if !$0 { message = nil } })) {
+            Button("OK") { message = nil }
+        } message: { Text(message ?? "") }
         .overlay(alignment:.bottom) {
             if let error = store.errorMessage { Text(error).padding().background(.regularMaterial) }
         }

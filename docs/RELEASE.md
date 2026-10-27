@@ -57,3 +57,14 @@ Installation: TestFlight auf Niklas’ iPhone öffnen, PV Kompass auswählen und
 Der Standort-Warteablauf wird zusätzlich mit einem expliziten Simulator-Fixture geprüft. Dieses Fixture ist nicht auf physischen Geräten verfügbar. Den realen iOS-Freigabedialog und gesprochene VoiceOver-Ansagen muss Niklas weiterhin am Gerät gegenprüfen.
 
 Build 2 ist verarbeitet und für Niklas in der internen TestFlight-Gruppe verfügbar. Build-ID `bdbecea1-1a16-4da3-a329-cf9280ae3843`, `VALID`, `IN_BETA_TESTING`, Export-Compliance unverändert `usesNonExemptEncryption=false`. Gruppen-Zuordnung nach Verarbeitung separat geprüft; deutsche Releasehinweise gespeichert.
+
+## Build 3 – Messverlauf
+
+- Teilen-Button oben rechts im Messverlauf exportiert alle aktuell gespeicherten Messungen als eine CSV mit nur einer Kopfzeile. Reihenfolge entspricht der Liste (neueste zuerst); vorhandene GPS-Daten und alle bisherigen Spalten bleiben enthalten. Bei leerem Verlauf ist der Button deaktiviert.
+- „Alle Messungen löschen“ steht in einem eigenen Abschnitt unter sämtlichen Messungen. Eine Bestätigung nennt die Anzahl und weist auf Unwiderruflichkeit hin.
+- Einzelne Messungen lassen sich per Wischgeste oder benannter VoiceOver-Aktion löschen, jeweils nach Bestätigung. Full-Swipe-Löschen ist deaktiviert.
+- Löschungen werden atomar gespeichert; bei Schreibfehlern bleibt der sichtbare Verlauf unverändert. Gelöschte aktuelle Ergebnisse werden auch vom Messscreen entfernt. Bereits exportierte Dateien werden nicht gelöscht.
+
+Build 3 signiert und erfolgreich zu Apple hochgeladen. Finales Archiv: `build/PVKompass-Build3-Final.xcarchive`, IPA: `build/release-build3/PVKompass.ipa`. Signatur, iPhone-Gerätefamilie, Bundle und Buildnummer 3 geprüft. Apple-Verarbeitung steht zum Uploadzeitpunkt noch aus.
+
+Apple-Verarbeitung von Build 3 abgeschlossen: `VALID` und `IN_BETA_TESTING`. Build-ID `6990fc60-ba32-477c-b794-4e650fe2830e`. Build und Niklas sind in der internen Gruppe verifiziert; deutsche TestFlight-Hinweise aktualisiert. Version 1.0.0 (3) kann über TestFlight installiert werden.

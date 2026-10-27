@@ -42,3 +42,9 @@ Startansage ist explizit, um 650 ms verzögert und als VoiceOver-Warteschlangena
 MCP-Screenshot `screenshots/03-build2-waagerecht-und-teilen.jpg` nach realer MCP-UI-Navigation mit Simulator-Demodaten aufgenommen und visuell geprüft: Erklärung vollständig lesbar, CSV-Button oben rechts. MCP-Accessibility-Hierarchie bestätigt den vollständigen Begründungstext im Accessibility-Wert von „Ausrichtung“.
 
 Lokaler MCP-UI-Treiber AXe 1.8.0 ist vorhanden. Homebrew-Linking scheiterte an einem fremden Tailscale-Link; daher privaten MCP-Wrapper auf den absoluten Cellar-Pfad setzen. Die in der AXe-Formel vorgesehenen ad-hoc-Post-Install-Signaturen wurden gezielt nachgeholt. Keine Tailscale-Konfiguration verändert. Screenshot nach MCP-Testlauf erfordert gegebenenfalls erneutes `boot_sim`, da Tests den Simulator herunterfahren können.
+
+## Build 3
+
+Vollständiger finaler Xcode-MCP-Lauf: 27 Tests, 27 bestanden, 0 fehlgeschlagen, 0 übersprungen. Neue Abdeckung: Sammel-CSV mit einmaliger Kopfzeile/BOM, zwei verschiedenen Datensätzen und Formelschutz; Alle-Löschen mit Neustart-Persistenz und Schutz korrupter Dateien; UI-Gesamtexport mit nativem Share-Sheet, Abbrechen und Bestätigen einer Wisch-Löschung sowie Abbrechen und Bestätigen der gesamten Löschung.
+
+Zusätzlich wurde eine tatsächlich über die UI erzeugte Sammel-CSV mit einem unabhängigen CSV-Parser gelesen: 16 Messungen, je 20 Spalten und genau eine Kopfzeile. MCP-Screenshot `screenshots/04-build3-messverlauf.jpg` visuell geprüft: Export oben rechts, Alle-Löschen unter allen Einträgen. Die MCP-Accessibility-Hierarchie enthält die benannte Aktion „Messung löschen“. Alle Screenshots verwenden gekennzeichnete Simulator-Demodaten.

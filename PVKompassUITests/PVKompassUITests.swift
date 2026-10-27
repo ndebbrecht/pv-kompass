@@ -66,6 +66,46 @@ final class PVKompassUITests: XCTestCase {
         XCTAssertTrue(app.otherElements["ActivityListView"].waitForExistence(timeout:5) || app.buttons["Close"].exists || app.buttons["Schließen"].exists)
         let shot = XCTAttachment(screenshot:app.screenshot()); shot.name = "CSV direkt aus Messung"; shot.lifetime = .keepAlways; add(shot)
     }
+    @MainActor func testHistoryBatchShareSwipeDeleteAndDeleteAll() {
+        let app = XCUIApplication(); app.launchArguments = ["--ui-testing-demo"]; app.launch()
+        for _ in 0..<2 {
+            app.buttons["startMeasurement"].tap()
+            XCTAssertTrue(app.buttons["showResult"].waitForExistence(timeout:12))
+        }
+        app.tabBars.buttons["Verlauf"].tap()
+        let export = app.navigationBars.buttons["exportAllCSV"]
+        XCTAssertTrue(export.isEnabled); XCTAssertTrue(export.isHittable)
+        export.tap()
+        XCTAssertTrue(app.otherElements["ActivityListView"].waitForExistence(timeout:5) || app.buttons["Close"].exists || app.buttons["Schließen"].exists)
+        if app.buttons["Close"].exists { app.buttons["Close"].tap() }
+        else if app.buttons["Schließen"].exists { app.buttons["Schließen"].tap() }
+        else { app.swipeDown() }
+        let rows = app.descendants(matching:.any).matching(NSPredicate(format:"identifier BEGINSWITH %@", "history-"))
+        let row = rows.firstMatch
+        XCTAssertTrue(row.waitForExistence(timeout:5))
+        let removedID = row.identifier
+        row.swipeLeft()
+        app.buttons["Löschen"].firstMatch.tap()
+        XCTAssertTrue(app.buttons["Messung endgültig löschen"].waitForExistence(timeout:3))
+        app.buttons["Abbrechen"].tap()
+        XCTAssertTrue(app.descendants(matching:.any)[removedID].exists)
+        app.descendants(matching:.any)[removedID].swipeLeft()
+        app.buttons["Löschen"].firstMatch.tap()
+        app.buttons["Messung endgültig löschen"].tap()
+        XCTAssertFalse(app.descendants(matching:.any)[removedID].waitForExistence(timeout:2))
+        let all = app.buttons["deleteAllMeasurements"]
+        for _ in 0..<20 { if all.isHittable { break }; app.swipeUp() }
+        XCTAssertTrue(all.isHittable)
+        all.tap()
+        XCTAssertTrue(app.buttons["Alle Messungen endgültig löschen"].waitForExistence(timeout:3))
+        app.buttons["Abbrechen"].tap()
+        XCTAssertTrue(all.exists)
+        all.tap(); app.buttons["Alle Messungen endgültig löschen"].tap()
+        XCTAssertTrue(app.staticTexts["Noch keine Messungen"].waitForExistence(timeout:5))
+        XCTAssertFalse(export.isEnabled)
+        app.terminate(); app.launch(); app.tabBars.buttons["Verlauf"].tap()
+        XCTAssertTrue(app.staticTexts["Noch keine Messungen"].waitForExistence(timeout:5))
+    }
     @MainActor func testStartScreenAccessibility() throws {
         let app = XCUIApplication(); app.launch()
         try app.performAccessibilityAudit(for:[.contrast,.elementDetection,.sufficientElementDescription,.trait,.hitRegion,.textClipped]) { issue in

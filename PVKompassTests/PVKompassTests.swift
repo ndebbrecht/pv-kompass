@@ -160,3 +160,33 @@ final class MeasurementStartTests: XCTestCase {
         XCTAssertNil(m.azimuthUnavailableReason)
     }
 }
+
+final class BatchExportTests: XCTestCase {
+    func testBatchHasOneHeaderAndOneBOMAndMatchesIndividualRows() {
+        var a = PanelMeasurement.example(); a.name = "Süd, \"Haus\""; a.isDemo = false
+        var b = a; b.id = UUID(); b.name = "=SUM(A1)"; b.coordinates = .init(latitude: -33, longitude: -70, horizontalAccuracy: 5, timestamp: Date())
+        let batch = CSVExport.content([a,b])
+        let singleA = CSVExport.content(a), singleB = CSVExport.content(b)
+        let rowA = singleA.components(separatedBy: "\r\n")[1]
+        let rowB = singleB.components(separatedBy: "\r\n")[1]
+        XCTAssertEqual(batch.components(separatedBy: "\u{FEFF}").count, 2)
+        XCTAssertEqual(batch.components(separatedBy: "id,name,timestamp_utc,timezone").count, 2)
+        XCTAssertTrue(batch.hasSuffix(rowA + "\r\n" + rowB + "\r\n"))
+        XCTAssertTrue(batch.contains("'=SUM(A1)"))
+        XCTAssertTrue(batch.contains("\"-33.000000\""))
+    }
+    @MainActor func testDeleteAllPersistsAndCorruptHistoryStaysProtected() throws {
+        let dir = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: dir) }
+        let url = dir.appendingPathComponent("measurements.json")
+        let store = MeasurementStore(fileURL: url)
+        try store.add(.example()); try store.add(.example())
+        try store.deleteAll()
+        XCTAssertTrue(store.measurements.isEmpty)
+        XCTAssertTrue(MeasurementStore(fileURL: url).measurements.isEmpty)
+        try Data("corrupt".utf8).write(to: url)
+        let broken = MeasurementStore(fileURL: url)
+        XCTAssertThrowsError(try broken.deleteAll())
+        XCTAssertEqual(try String(contentsOf: url), "corrupt")
+    }
+}

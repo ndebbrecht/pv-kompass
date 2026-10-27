@@ -16,12 +16,19 @@ import SwiftUI
 }
 
 struct RootView: View {
+    @EnvironmentObject private var store: MeasurementStore
+    @EnvironmentObject private var sensor: SensorService
+    private var measurementIDs: [UUID] { store.measurements.map { $0.id } }
     var body: some View {
         TabView {
             NavigationStack { MeasurementView() }
                 .tabItem { Label("Messung", systemImage: "sun.max") }
             NavigationStack { HistoryView() }
                 .tabItem { Label("Verlauf", systemImage: "clock.arrow.circlepath") }
+        }
+        .onChange(of: measurementIDs) { previous, current in
+            let removed: Set<UUID> = Set(previous).subtracting(current)
+            sensor.forgetResults(ids: removed)
         }
     }
 }
