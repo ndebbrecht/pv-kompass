@@ -40,3 +40,9 @@ Update: Developer-Lizenzannahme durch Apple-Mail um 12:12 Uhr bestätigt; API-Zu
 Niklas hat den ASC-App-Eintrag angelegt: App-ID `6827541265`, Bundle-ID wie geplant, Sprache de-DE. Die signierte IPA wurde um 13:13:32 erfolgreich von App Store Connect angenommen. Version 1.0.0, Build 1. Apple-Verarbeitung und installierbarer TestFlight-Zugang sind noch zu prüfen.
 
 Interne Gruppe „Niklas – intern“ angelegt (`cc22a1b4-18b5-4c4b-bd1f-a47bb41741d1`), nur Niklas zugeordnet. BetaTester-IDs sind hier app-spezifisch: Wiederverwenden der KnowDown-ID ergab 409; POST betaTesters mit derselben E-Mail und neuer Gruppenrelation erzeugte den passenden PV-Kompass-Tester `958e0f11-b470-42ab-8055-e017776f80d1`. Andere Apps/Tester unverändert.
+
+## TestFlight verfügbar
+
+Apple-Verarbeitung abgeschlossen. Build `520c48af-36a8-4c3c-ad01-c21598ebf9f5` (1.0.0 / 1) hat `processingState=VALID`, `usesNonExemptEncryption=false` und `internalBuildState=IN_BETA_TESTING`. Interne Gruppe enthält diesen Build und Niklas. Testerstatus von Apple: `INSTALLED` (dies ist Apples API-Status, kein unabhängiger Nachweis eines physischen Tests). Deutsche Testhinweise gespeichert. Keine externe Beta-Review oder öffentliche Veröffentlichung ausgelöst.
+
+Installation: TestFlight auf Niklas’ iPhone öffnen, PV Kompass auswählen und installieren. Voraussetzung iOS 17 oder neuer. 18/18 Simulator-Tests via Xcode-MCP bestanden; echte Sensorqualität und VoiceOver-Bedienung durch Niklas bleiben reale Gerätetests.
