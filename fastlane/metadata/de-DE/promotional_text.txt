@@ -1,0 +1,1 @@
+PV-Module mit dem iPhone vermessen: Neigung, Ausrichtung und GPS lokal speichern, Messungen benennen und als CSV teilen. Für VoiceOver und große Schrift entwickelt.

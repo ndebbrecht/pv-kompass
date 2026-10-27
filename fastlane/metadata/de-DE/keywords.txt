@@ -1,0 +1,1 @@
+photovoltaik,balkonkraftwerk,azimut,winkel,dach,sonne,anlage,homeassistant,csv,gps

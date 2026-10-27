@@ -1,6 +1,6 @@
-# TestFlight-Release
+# TestFlight und App-Store-Release
 
-Ziel: private TestFlight-Nutzung durch Niklas; keine öffentliche App-Store-Veröffentlichung.
+Ursprüngliches Ziel: private TestFlight-Nutzung. Seit 27.10.2026 ist auch die öffentliche App-Store-Einreichung und automatische Veröffentlichung nach Apple-Freigabe ausdrücklich autorisiert.
 
 ## Stand 27.10.2026
 
@@ -68,3 +68,15 @@ Build 2 ist verarbeitet und für Niklas in der internen TestFlight-Gruppe verfü
 Build 3 signiert und erfolgreich zu Apple hochgeladen. Finales Archiv: `build/PVKompass-Build3-Final.xcarchive`, IPA: `build/release-build3/PVKompass.ipa`. Signatur, iPhone-Gerätefamilie, Bundle und Buildnummer 3 geprüft. Apple-Verarbeitung steht zum Uploadzeitpunkt noch aus.
 
 Apple-Verarbeitung von Build 3 abgeschlossen: `VALID` und `IN_BETA_TESTING`. Build-ID `6990fc60-ba32-477c-b794-4e650fe2830e`. Build und Niklas sind in der internen Gruppe verifiziert; deutsche TestFlight-Hinweise aktualisiert. Version 1.0.0 (3) kann über TestFlight installiert werden.
+
+## Öffentliche Einreichung – 27.10.2026, 14:50 MEZ
+
+- Version 1.0.0, Build 4 mit neuem Icon, signiert und verarbeitet (`VALID`, `APP_STORE_ELIGIBLE`). Build-ID `f81dc716-ce7c-4e33-9c10-5d6c48ce6402`. Funktionaler Code entspricht dem mit 27/27 Simulator-/MCP-Tests geprüften Stand.
+- Deutschsprachige ASO-Metadaten unter `fastlane/metadata/de-DE/`. Zehn Screenshots: je fünf für APP_IPHONE_61 und APP_IPHONE_67; sämtliche Uploads `COMPLETE`, Reihenfolge 01–05 geprüft. Altersfreigabe 4+.
+- Kostenloser Preis, 175 verfügbare Territorien, keine Vorbestellung. Review-Kontakt und physische Sensor-Testanleitung bei Apple hinterlegt; private Kontaktdaten nicht im Repository.
+- Support, Datenschutz und Impressum unter https://debbrecht.com/pv-kompass/ öffentlich bereitgestellt. Quellstand im Unterordner `website/`. Nur den App-Unterbaum deployen, keine anderen Seiten löschen.
+- Niklas hat die Apple-Datenschutzdeklaration am 27.10. selbst ausgefüllt und veröffentlicht und anschließend die Fortsetzung autorisiert.
+- Review-Submission `a80f6b03-9e3c-4aa3-ab8f-d5c30726ef7b` am 27.10.2026 um 13:50:04 UTC von Apple angenommen: **WAITING_FOR_REVIEW**.
+- `releaseType=AFTER_APPROVAL`: nach Apple-Freigabe automatische Veröffentlichung; noch nicht im App Store live.
+- Private GitHub-Sicherung: https://github.com/ndebbrecht/pv-kompass. Bestehendes GitLab-Remote bleibt erhalten. Quellcode erst nach gesonderter Sichtbarkeitsentscheidung veröffentlichen.
+- Bei Fortsetzung zuerst Review-Submission und App-Store-Versionsstatus abfragen; keine doppelte Submission erstellen. Öffentlichen App-Store-Link erst nach tatsächlicher Verfügbarkeit als live bezeichnen: https://apps.apple.com/app/id6827541265.

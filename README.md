@@ -9,10 +9,10 @@ Native, deutschsprachige iPhone-App für die Vermessung einer PV-Modulfläche. i
 - Modulneigung und Richtung der Modulvorderseite, unabhängig von der Drehung des iPhones in der Modulfläche.
 - Geografisch-Nord-Korrektur aus gültigem Core-Location-Kompassbezug; ausdrücklich gekennzeichneter magnetischer Fallback ohne HA-Kopierfunktion.
 - Kalibrierungs-, Bewegungs- und Fehlerhinweise, Abbruch und Neustart.
-- Haptisches und VoiceOver-Abschlusssignal, Status auf Abruf statt dauernder Zahlenansagen.
+- Haptisches und VoiceOver-Start- und Abschlusssignal, Status auf Abruf statt dauernder Zahlenansagen.
 - Automatisch lokal gespeicherter Verlauf mit Datum, Uhrzeit und Zeitzone. Messungen benennen und nach Bestätigung löschen.
 - GPS inklusive gemeldeter Genauigkeit und GPS-Zeitpunkt, soweit erlaubt/verfügbar.
-- Einzelne Messung als UTF-8-CSV mit Kopfzeile über das native Apple-Share-Sheet.
+- Einzelne Messung oder gesamten Verlauf als UTF-8-CSV mit Kopfzeile über das native Apple-Share-Sheet.
 - HA-Werte kopieren; getrennte Spalten für HA Forecast.Solar und direkte Forecast.Solar-API.
 - Dynamische Schrift, semantische Beschriftungen, helle/dunkle Darstellung, keine visuelle Kompassbedienung erforderlich.
 
@@ -45,4 +45,4 @@ Messungen werden im Application-Support-Verzeichnis der App als atomar geschrieb
 
 Bundle-ID: `com.debbrecht.pvkompass`, Apple-Team: `4V346NPC35`.
 
-Signierung und Upload verwenden vorhandene Apple-Zugangsdaten außerhalb des Repositorys. Keine Schlüssel oder Provisioning-Profile einchecken. Es wird nur zu TestFlight hochgeladen, nicht zur öffentlichen App-Store-Veröffentlichung eingereicht. Siehe `docs/RELEASE.md`.
+Signierung und Upload verwenden vorhandene Apple-Zugangsdaten außerhalb des Repositorys. Keine Schlüssel oder Provisioning-Profile einchecken. Die öffentliche App-Store-Einreichung mit automatischer Veröffentlichung nach Apple-Freigabe ist seit 27.10.2026 autorisiert. Das GitHub-Repository bleibt bis zu einer gesonderten Freigabe privat. Siehe `docs/RELEASE.md`.

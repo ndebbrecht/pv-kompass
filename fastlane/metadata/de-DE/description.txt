@@ -1,0 +1,28 @@
+Wie stehen deine Solarmodule? PV Kompass misst Neigung und Ausrichtung einer Modulfläche mit den integrierten Sensoren deines iPhones. Für Photovoltaik und Balkonkraftwerke – ohne Konto, Werbung oder Tracking.
+
+AUFLEGEN, STARTEN, ERGEBNIS PRÜFEN
+Lege das iPhone mit der Rückseite parallel auf die Vorderseite des Moduls. Die App sammelt Sensorwerte und schließt die Messung bei stabilen Werten automatisch ab. Klare Hinweise helfen bei Bewegung oder notwendiger Kompasskalibrierung. Start und Abschluss werden mit VoiceOver-Ansagen und haptischem Feedback begleitet.
+
+NEIGUNG UND AUSRICHTUNG
+• Neigung gegenüber der Waagerechten messen.
+• Richtung der Modulvorderseite als Azimut ablesen – unabhängig davon, wie das iPhone innerhalb der Modulfläche gedreht ist.
+• Geografischen und magnetischen Nordbezug klar unterscheiden.
+• Bei nahezu waagerechter Lage verständlich erfahren, warum keine eindeutige Himmelsrichtung bestimmbar ist.
+
+DEIN MESSVERLAUF
+• Ergebnisse lokal mit Datum, Uhrzeit und Zeitzone speichern.
+• Messungen benennen und später wiederfinden.
+• GPS-Koordinaten samt gemeldeter Genauigkeit speichern, wenn du den Standortzugriff erlaubst und eine aktuelle Position verfügbar ist.
+• Einzelne Messungen oder den gesamten Verlauf nach Bestätigung löschen.
+
+CSV UND HOME ASSISTANT
+Teile eine Messung oder den gesamten Verlauf als CSV über das Apple-Teilen-Menü. Für die manuelle Einrichtung von Forecast.Solar in Home Assistant kannst du geeignete geografische Winkelwerte kopieren. Die CSV trennt die Winkelkonventionen der HA-Integration und der direkten Forecast.Solar-API. Eine automatische Übertragung zu Home Assistant oder eine Ertragsberechnung erfolgt nicht.
+
+FÜR VOICEOVER ENTWICKELT
+Beschriftete Bedienelemente, Status auf Abruf, große dynamische Schrift und klare Messhinweise unterstützen die Bedienung mit VoiceOver. Du musst keine visuelle Kompassrose ausrichten.
+
+DEINE DATEN BLEIBEN BEI DIR
+Kein Backend und keine Registrierung. Die App sendet keine Messungen an den Entwickler. Daten verlassen das iPhone nur durch von dir veranlasstes Teilen oder durch von dir verwendete iOS-Sicherungsdienste. Du bestimmst über die Standortfreigabe, ob GPS erfasst wird.
+
+WICHTIGE MESSHINWEISE
+Metall, Stromleitungen und magnetische Hüllen können die Richtung beeinflussen. Stabile Werte garantieren keine absolute Genauigkeit. Kamerabuckel und Hüllen dürfen die Auflage nicht verkippen. Verwende die App nur an sicher erreichbaren, nicht heißen Modulflächen; sie ersetzt kein professionelles Vermessungsgerät oder eine fachliche Anlagenplanung.
