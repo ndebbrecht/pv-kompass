@@ -45,4 +45,4 @@ Messungen werden im Application-Support-Verzeichnis der App als atomar geschrieb
 
 Bundle-ID: `com.debbrecht.pvkompass`, Apple-Team: `4V346NPC35`.
 
-Signierung und Upload verwenden vorhandene Apple-Zugangsdaten außerhalb des Repositorys. Keine Schlüssel oder Provisioning-Profile einchecken. Die öffentliche App-Store-Einreichung mit automatischer Veröffentlichung nach Apple-Freigabe ist seit 27.10.2026 autorisiert. Das GitHub-Repository bleibt bis zu einer gesonderten Freigabe privat. Siehe `docs/RELEASE.md`.
+Signierung und Upload verwenden vorhandene Apple-Zugangsdaten außerhalb des Repositorys. Keine Schlüssel oder Provisioning-Profile einchecken. Die öffentliche App-Store-Einreichung mit automatischer Veröffentlichung nach Apple-Freigabe ist seit 27.10.2026 autorisiert. Die App ist kostenlos im [App Store](https://apps.apple.com/de/app/id6827541265) verfügbar. Niklas hat am 02.11.2026 die Veröffentlichung des [GitHub-Repositorys](https://github.com/ndebbrecht/pv-kompass) nach Prüfung von Inhalt und Historie freigegeben. Siehe `docs/RELEASE.md`.
